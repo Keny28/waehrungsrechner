@@ -123,3 +123,23 @@
     </form>
 </body>
 </html>
+<form method="POST">
+    {% csrf_token %}
+    <label>Wechselkurs (EUR → EGP):</label>
+    <input type="number" name="manual_rate" step="0.01" value="{{ rate }}" required />
+
+    <h2>EUR → EGP</h2>
+    <input type="number" step="0.01" name="amount_eur" placeholder="Betrag in EUR" value="{{ amount_eur|default_if_none:'' }}" />
+    <button type="submit" name="action" value="eur_to_egp">Umrechnen</button>
+
+    <h2>EGP → EUR</h2>
+    <input type="number" step="0.01" name="amount_egp" placeholder="Betrag in EGP" value="{{ amount_egp|default_if_none:'' }}" />
+    <button type="submit" name="action" value="egp_to_eur">Umrechnen</button>
+</form>
+
+{% if result_eur_to_egp %}
+    <p>{{ amount_eur }} EUR = {{ result_eur_to_egp }} EGP</p>
+{% endif %}
+{% if result_egp_to_eur %}
+    <p>{{ amount_egp }} EGP = {{ result_egp_to_eur }} EUR</p>
+{% endif %}
