@@ -1,11 +1,11 @@
- from django.shortcuts import render
+from django.shortcuts import render
 
 def index(request):
     result_eur_to_egp = None
     result_egp_to_eur = None
     amount_eur = None
     amount_egp = None
-    rate = 33  # Beispiel-Wechselkurs
+    rate = 55  # Beispiel-Wechselkurs
 
     if request.method == 'POST':
         action = request.POST.get('action')
