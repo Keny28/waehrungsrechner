@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <title>Währungsumrechner EUR ⇄ EGP</title>
+    <style>
+        body {
+            font-family: 'Permanent Marker', cursive;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 10px;
+            background-color: #cabebe; /* leichtes Grau */
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(223, 80, 80, 0.1);
+        }
+        input[type="number"] {
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1em;
+            margin-bottom: 12px;
+        }
+        button {
+            background-color: #a4a575;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        button:hover {
+            background-color: #04fc25;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #333;
+            text-align: center;
+        }
+        h2 {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Währungsumrechner EUR ⇄ EGP</h1>
+
+    <h2>EUR → EGP</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input 
+            type="number" 
+            step="0.01" 
+            name="amount_eur" 
+            placeholder="Betrag in EUR eingeben" 
+            value="{{ amount_eur|default:'' }}"
+        />
+        <button type="submit" name="action" value="eur_to_egp">Umrechnen</button>
+    </form>
+
+    {% if result_eur_to_egp %}
+        <div class="result">
+            {{ amount_eur }} EUR = {{ result_eur_to_egp }} EGP
+        </div>
+    {% endif %}
+
+    <h2>EGP → EUR</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input 
+            type="number" 
+            step="0.01" 
+            name="amount_egp" 
+            placeholder="Betrag in EGP eingeben" 
+            value="{{ amount_egp|default:'' }}"
+        />
+        <button type="submit" name="action" value="egp_to_eur">Umrechnen</button>
+    </form>
+
+    {% if result_egp_to_eur %}
+        <div class="result">
+            {{ amount_egp }} EGP = {{ result_egp_to_eur }} EUR
+        </div>
+    {% endif %}
+</body>
+</html>
+
