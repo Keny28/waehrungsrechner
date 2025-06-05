@@ -1,12 +1,11 @@
 from django.shortcuts import render
 
 def index(request):
+    rate = 56.81  # Manueller Wechselkurs
     result_eur_to_egp = None
     result_egp_to_eur = None
     amount_eur = None
     amount_egp = None
-
-    rate = 56.81  # ← HIER kannst du den Kurs manuell setzen
 
     if request.method == 'POST':
         action = request.POST.get('action')
@@ -17,7 +16,6 @@ def index(request):
                 result_eur_to_egp = round(amount_eur * rate, 2)
             except ValueError:
                 result_eur_to_egp = "Ungültiger Betrag"
-
         elif action == 'egp_to_eur':
             try:
                 amount_egp = float(request.POST.get('amount_egp', '0'))
@@ -25,11 +23,10 @@ def index(request):
             except ValueError:
                 result_egp_to_eur = "Ungültiger Betrag"
 
-    context = {
+    return render(request, "converter/index.html", {
+        'rate': rate,
         'result_eur_to_egp': result_eur_to_egp,
         'result_egp_to_eur': result_egp_to_eur,
         'amount_eur': amount_eur,
         'amount_egp': amount_egp,
-        'rate': rate,
-    }
-    return render(request, "converter/index.html", context)
+    })
