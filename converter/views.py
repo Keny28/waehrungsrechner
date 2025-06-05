@@ -1,12 +1,4 @@
-import requests
-
-def get_exchange_rate():
-    try:
-        response = requests.get("https://api.exchangerate.host/latest?base=EUR&symbols=EGP")
-        data = response.json()
-        return data["rates"]["EGP"]
-    except:
-        return 56.81  # Fallback-Kurs
+from django.shortcuts import render
 
 def index(request):
     result_eur_to_egp = None
@@ -14,7 +6,7 @@ def index(request):
     amount_eur = None
     amount_egp = None
 
-    rate = get_exchange_rate()  # Aktuellen Kurs holen
+    rate = 56.81  # ← HIER kannst du den Kurs manuell setzen
 
     if request.method == 'POST':
         action = request.POST.get('action')
