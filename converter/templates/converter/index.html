@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <title>Währungsumrechner EUR ⇄ EGP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Permanent Marker', cursive;
             max-width: 500px;
             margin: 40px auto;
             padding: 10px;
-            background-color: #cabebe; /* leichtes Grau */
+            background-color: #cabebe;
             border-radius: 8px;
             box-shadow: 0 0 8px rgba(223, 80, 80, 0.1);
         }
@@ -56,7 +57,7 @@
             step="0.01" 
             name="amount_eur" 
             placeholder="Betrag in EUR eingeben" 
-            value="{{ amount_eur|default:'' }}"
+            value="{{ amount_eur|default('') }}"
         />
         <button type="submit" name="action" value="eur_to_egp">Umrechnen</button>
     </form>
@@ -74,7 +75,7 @@
             step="0.01" 
             name="amount_egp" 
             placeholder="Betrag in EGP eingeben" 
-            value="{{ amount_egp|default:'' }}"
+            value="{{ amount_egp|default('') }}"
         />
         <button type="submit" name="action" value="egp_to_eur">Umrechnen</button>
     </form>
@@ -86,6 +87,7 @@
     {% endif %}
 </body>
 </html>
+
 from flask import Flask, request, render_template
 
 app = Flask(__name__)
