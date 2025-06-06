@@ -8,7 +8,7 @@ def index():
     result_egp_to_eur = None
     amount_eur = None
     amount_egp = None
-    eur_to_egp_rate = 51.5  # Beispielkurs
+    eur_to_egp_rate = 56.81  # Beispielkurs
     egp_to_eur_rate = 1 / eur_to_egp_rate
 
     if request.method == "POST":
