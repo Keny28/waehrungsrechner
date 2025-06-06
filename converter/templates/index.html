@@ -68,7 +68,7 @@
     <h1>Währungsumrechner EUR ⇄ EGP</h1>
 
     <form method="POST">
-        {% csrf_token %}
+        
 
         <div class="section">
             <label for="manual_rate">Wechselkurs (EUR → EGP):</label>
@@ -91,7 +91,7 @@
                 name="amount_eur" 
                 id="amount_eur"
                 placeholder="z. B. 100" 
-                value="{{ amount_eur or '' }}"
+                value="{{ amount_eur|default_if_none:'' }}"
             />
             <button type="submit" name="action" value="eur_to_egp">EUR → EGP umrechnen</button>
         </div>
@@ -110,7 +110,7 @@
                 name="amount_egp" 
                 id="amount_egp"
                 placeholder="z. B. 1000" 
-                value="{{ amount_egp or '' }}"
+                value="{{ amount_egp|default_if_none:'' }}"
             />
             <button type="submit" name="action" value="egp_to_eur">EGP → EUR umrechnen</button>
         </div>
@@ -124,7 +124,7 @@
 </body>
 </html>
 <form method="POST">
-    {% csrf_token %}
+    
     <label>Wechselkurs (EUR → EGP):</label>
     <input type="number" name="manual_rate" step="0.01" value="{{ rate }}" required />
 
